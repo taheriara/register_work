@@ -1,4 +1,5 @@
 import 'package:register_work/db_helper/repository.dart';
+import 'package:register_work/models/report.dart';
 import 'package:register_work/models/task.dart';
 
 class TaskService {
@@ -19,6 +20,13 @@ class TaskService {
   //Read All Users
   readAllTask() async {
     return await _repository.readDataAll('tasks');
+  }
+
+  Future<List<Report>> getReport() async {
+    var groceries =
+        await _repository.report("select category, type, COUNT(id) as qty from tasks GROUP BY category, type ORDER BY category;");
+    List<Report> groceryList = groceries.isNotEmpty ? List<Report>.from(groceries.map((c) => Report.fromJson(c)).toList()) : [];
+    return groceryList;
   }
 
   Future<List<Task>> getAllTasksYearMonth(String month, String year) async {

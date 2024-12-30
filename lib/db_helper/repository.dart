@@ -14,6 +14,12 @@ class Repository {
     return await _databaseConnection.setDatabase();
   }
 
+  //Read All Records
+  report(sql) async {
+    var db = await database;
+    return await db?.rawQuery(sql, null);
+  }
+
   //Insert Record
   insertData(table, data) async {
     var db = await database;

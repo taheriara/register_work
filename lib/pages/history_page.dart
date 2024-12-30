@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_work/models/task.dart';
+import 'package:register_work/pages/export_data_page.dart';
 import 'package:register_work/services/task_service.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -30,7 +31,19 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('آرشیو ثبت کارها'),
+          title: const Text('آرشیو ثبت کارها'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ExportDataPage()),
+                  );
+                },
+                icon: const Icon(
+                  Icons.print,
+                ))
+          ],
         ),
         body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
